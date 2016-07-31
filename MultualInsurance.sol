@@ -137,10 +137,10 @@ contract MutualInsurance {
      * 退款
      */
     function Drawback(uint64 participantId, uint64 money) {
-        if (participants[participantId].transactionAmount == 0) {
+        /*if (participants[participantId].transactionAmount == 0) {
             throw;
-        }
-        participants[participantId].transactionAmount--;
+        }*/
+        participants[participantId].transactionAmount++;
         participants[participantId].balance -= money;
         
         transactions[participantId].push(Transaction({
@@ -158,9 +158,9 @@ contract MutualInsurance {
      * 互助
      */
     function Transfer(uint64 payeeId, uint64 money) {
-        if (participants[payeeId].transactionAmount == 0) {
+        /*if (participants[payeeId].transactionAmount == 0) {
             throw;
-        }
+        }*/
         var payers = new uint64[](ParticipantsAmount - 1);
         for (var i = 0; i < ParticipantsAmount; i++) {
             uint64 participantId = participantsIndex[i];
@@ -204,7 +204,4 @@ contract MutualInsurance {
         }));
         return true;
     }
-    
-    
-    
 }

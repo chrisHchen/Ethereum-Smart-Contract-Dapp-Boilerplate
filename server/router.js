@@ -1,4 +1,4 @@
-import { join, balanceEvent, participantEvent, filterPending } from './mutual'
+import { join, exit, topUp, drawback, transfer, getParticipantsAmount, balanceEvent, participantEvent } from './mutual'
 export default function(app){
 	//pre handler
 	app.use( (req, res, next) => {
@@ -9,9 +9,13 @@ export default function(app){
 		next()
 	})
 
-	app.post('/mutual/join', join)
+	app.post('/mutual/join/:appId', join)
+	app.post('/mutual/exit/:appId', exit)
+	app.post('/mutual/topUp/:appId', topUp)
+	app.post('/mutual/drawback/:appId', drawback)
+	app.post('/mutual/transfer/:appId', transfer)
+	app.get('/mutual/getParticipantsAmount/:appId', getParticipantsAmount)
 	
 	balanceEvent()
 	participantEvent()
-	filterPending()
 }
